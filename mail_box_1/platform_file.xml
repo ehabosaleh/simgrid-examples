@@ -1,0 +1,32 @@
+<?xml version ="1.0"?>
+<!DOCTYPE platform SYSTEM "https://simgrid.org/simgrid.dtd">
+<platform version="4.1">
+	<zone id="root_zone" routing="Full">
+		<zone id="zone_0" routing="Full">
+		
+			<cluster id="cluster_0" prefix="host_c_0_" suffix ="" radical="1-100" speed="1000Gf" bw="125MBps" lat="20ns" router_id="router_0"/>
+				
+			<cluster id ="cluster_1" prefix="host_c_1_" suffix="" radical="1-100" speed="1000Gf" bw="125MBps" lat="100us" router_id="router_1"/>
+			
+			<link id="link_0" bandwidth="100MBps" latency="100ns"/>
+			<zoneRoute src="cluster_0" dst="cluster_1" gw_src="router_0" gw_dst="router_1">
+				<link_ctn id="link_0"/>
+			</zoneRoute>
+			
+		</zone>
+		<zone id="zone_1" routing="Full">
+	
+			<cluster id="cluster_2" prefix="host_c_2_" suffix="" radical="1-1000" speed="1Gf" bw="125MBps" lat="10ns" router_id="router_2"/>
+			<cluster id="cluster_3" prefix="host_c_3_" suffix="" radical="1-100" speed="10Gf" bw="125MBps" lat="10ns" router_id="router_3"/>
+			<link id="link_1" bandwidth="125MBps" latency="100ns"/>
+			<zoneRoute src="cluster_2" dst="cluster_3" gw_src="router_2" gw_dst="router_3">
+				<link_ctn id="link_1"/>
+			</zoneRoute>
+			
+		</zone>
+		<link id="main_link" bandwidth="100MBps" latency="100ns"/>
+		<zoneRoute src="zone_0" dst="zone_1" gw_src="router_0" gw_dst="router_2">
+			<link_ctn id="main_link"/>
+		</zoneRoute>
+	</zone>
+</platform>
