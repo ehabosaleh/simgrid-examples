@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+<!DOCTYPE platform SYSTEM "https://simgrid.org/simgrid.dtd">
+<platform version="4.1">
+
+
+  <zone id="main_zone" routing="Full">
+	    <zone  id="intra_zone_0"  routing="Full">
+	    	<zone id="intra_zone_0_0"routing="Full">
+		    	<cluster id="cluster_0_0" speed="2Gf" core="1" radical="1-50" bw="150Mbps" lat="100us" prefix="c_0_0_" suffix="">
+		    		<prop id="wattage_per_state" value="65:95"/>
+		    	</cluster>
+		    	<cluster id="cluster_0_1" speed="2Gf" core="1" radical="1-50" bw="150Mbps" lat="100us" prefix="c_0_1_" suffix="">
+		    		<prop id="wattage_per_state" value="65:95"/>
+		    	</cluster>
+		    	<link id="link_0_0_a" bandwidth="1Gbps" latency="100us"/>
+		        <zoneRoute src="cluster_0_0" dst="cluster_0_1" gw_src="c_0_0_cluster_0_0_router" gw_dst="c_0_1_cluster_0_1_router">
+	      			<link_ctn id="link_0_0_a"/>
+	      		</zoneRoute>
+	    	</zone>
+	    	
+	      <cluster id="cluster_0" speed="2Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_0_" suffix="">
+	      		<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      
+	      <cluster id="cluster_1" speed="2Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_1_" suffix="">
+	      		<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      
+	      <cluster id="cluster_2" speed="2Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_2_" suffix="">
+	      		<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      
+
+	      <link id="link_0_0" bandwidth="1Gbps" latency="100us"/>
+	      <link id="link_0_1" bandwidth="1Gbps" latency="100us"/>
+	      <link id="link_0_2" bandwidth="1Gbps" latency="100us"/>
+	      <link id="link_0_3" bandwidth="1Gbps" latency="100us"/>
+	      <zoneRoute src="cluster_0" dst="cluster_1" gw_src="c_0_cluster_0_router" gw_dst="c_1_cluster_1_router">
+	      		<link_ctn id="link_0_0"/>
+	      </zoneRoute>
+	      
+	      <zoneRoute src="cluster_0" dst="cluster_2" gw_src="c_0_cluster_0_router" gw_dst="c_2_cluster_2_router">
+	      		<link_ctn id="link_0_1"/>
+	      </zoneRoute>
+	      
+	      <zoneRoute src="cluster_1" dst="cluster_2" gw_src="c_1_cluster_1_router" gw_dst="c_2_cluster_2_router">
+	      		<link_ctn id="link_0_2"/>
+	      </zoneRoute>
+	      <zoneRoute src="cluster_0" dst="cluster_0_0" gw_src="c_0_cluster_0_router" gw_dst="c_0_0_cluster_0_0_router">
+	      		<link_ctn id="link_0_3"/>
+	      </zoneRoute>
+	
+	    </zone>
+<!--====================================================================================================================== -->
+
+	    <zone  id="intra_zone_1"  routing="Full">
+	    
+	      <cluster id="cluster_3" speed="1.5Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_3_" suffix="">
+	      	<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      <cluster id="cluster_4" speed="1.5Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_4_" suffix="">
+	      	<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      
+	      <cluster id="cluster_5" speed="1.5Gf" core="1" radical="1-50"bw="150Mbps" lat="100us" prefix="c_5_" suffix="">
+	      	<prop id="wattage_per_state" value="65:95"/>
+	      </cluster>
+	      
+	      <link id="link_1_0" bandwidth="1Gbps" latency="100us"/>
+	      <link id="link_1_1" bandwidth="1Gbps" latency="100us"/>
+	      <link id="link_1_2" bandwidth="1Gbps" latency="100us"/>
+	      <zoneRoute src="cluster_3" dst="cluster_4" gw_src="c_3_cluster_3_router" gw_dst="c_4_cluster_4_router">
+	      	<link_ctn id="link_1_0"/>
+	      </zoneRoute>
+	      <zoneRoute src="cluster_3" dst="cluster_5" gw_src="c_3_cluster_3_router" gw_dst="c_5_cluster_5_router">
+	      	<link_ctn id="link_1_1"/>
+	      </zoneRoute>
+	      <zoneRoute src="cluster_4" dst="cluster_5" gw_src="c_1_cluster_1_router" gw_dst="c_5_cluster_5_router">
+	      	<link_ctn id="link_1_2"/>
+	      </zoneRoute>
+	    </zone>
+<!--==================================================================================================================-->
+	   <zone id="intra_zone_3" routing="Full">
+		   <router id="router_3"/>
+		   <host id="root" speed="1Gf" core="1">
+			<prop id="wattage_per_state" value="65:95"/>
+	   		<prop id="wattage_off" value="0.0" />
+		   </host>
+	  </zone>
+<!--==================================================================================================================-->
+	    <link id="internet" bandwidth="2.25GBps" latency="500us"/>
+<!--==================================================================================================================-->
+    	     <zoneRoute src="intra_zone_3" dst="cluster_3" gw_src="router_3" gw_dst="c_3_cluster_3_router">
+    	     		<link_ctn id="internet"/>
+    	     </zoneRoute>
+    	     <zoneRoute src="cluster_0" dst="cluster_3" gw_src="c_0_cluster_0_router" gw_dst="c_3_cluster_3_router">
+    	     		<link_ctn id="internet"/>
+    	     </zoneRoute>
+    	     
+  </zone>
+</platform>
