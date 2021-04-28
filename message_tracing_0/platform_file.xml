@@ -1,0 +1,28 @@
+
+<?xml version ="1.0"?>
+<!DOCTYPE platform SYSTEM "https://simgrid.org/simgrid.dtd">
+<platform version="4.1">
+	<zone id="zone_0" routing="Full">
+		<host id="host_0" speed ="20Gf" core="1">
+			<disk id="disk_0"  read_bw ="10GBps" write_bw="10GBps">
+				<prop id="content" value="/disk_0.txt"/>
+			</disk>
+		</host>
+		<host id="host_1" speed="10Gf" core="1">
+			<disk id="disk_1" read_bw="10GBps" write_bw="20GBps">
+				<prop id="content" value="/disk_1.txt"/>
+			</disk>
+		</host>
+		
+		<host id="host_2" speed="30Gf" core="1"/>
+		
+		<link id="link_0" bandwidth="150MBps" latency="100ns"/>
+		<link id="link_1" bandwidth="150MBps" latency="100ns"/>
+		<route src="host_0" dst="host_1">
+			<link_ctn id="link_0" />
+		</route>
+		<route src="host_1" dst="host_2">
+			<link_ctn id="link_1"/>
+		</route>
+	</zone>
+</platform>
