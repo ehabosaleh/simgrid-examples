@@ -1,21 +1,3 @@
-/* Copyright (c) 2017-2021. The SimGrid Team. All rights reserved.          */
-
-/* This program is free software; you can redistribute it and/or modify it
- * under the terms of the license (GNU LGPL) which comes with this package. */
-
-/* This example demonstrate the actor migrations.
- *
- * The worker actor first move by itself, and then start an execution.
- * During that execution, the monitor migrates the worker, that wakes up on another host.
- * The execution was of the right amount of flops to take exactly 5 seconds on the first host
- * and 5 other seconds on the second one, so it stops after 10 seconds.
- *
- * Then another migration is done by the monitor while the worker is suspended.
- *
- * Note that worker() takes an uncommon set of parameters,
- * and that this is perfectly accepted by create().
- */
-
 #include <simgrid/s4u.hpp>
 #include<iostream>
 namespace sg4 = simgrid::s4u;
